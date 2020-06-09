@@ -21,6 +21,10 @@
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
+      <v-spacer></v-spacer>
+      <v-btn icon @click="logout">
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-content>
       <v-container>
@@ -35,6 +39,8 @@
 </template>
 
 <script>
+import * as Auth from "../api/auth";
+
 export default {
   data() {
     return {
@@ -46,12 +52,12 @@ export default {
           icon: "mdi-apps",
           title: "Главная",
           to: "/"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Профиль",
+          to: "/profile"
         }
-        // {
-        //   icon: "mdi-chart-bubble",
-        //   title: "Inspire",
-        //   to: "/inspire"
-        // }
       ],
 
       title: "Code Competition Web Platform "
@@ -64,6 +70,13 @@ export default {
     isLogedIn: function() {
       let token = window.localStorage.getItem("token");
       return token ? true : false;
+    },
+    logout: function() {
+      let isSure = confirm("Вы уверены что хотите выйти из аккаунта ?");
+      if (isSure) {
+        Auth.logout();
+        window.$nuxt.setLayout("login");
+      }
     }
   }
 };
