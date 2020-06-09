@@ -56,6 +56,15 @@ export default {
 
       title: "Code Competition Web Platform "
     };
+  },
+  created: async function() {
+    if (!this.isLogedIn()) window.$nuxt.setLayout("login");
+  },
+  methods: {
+    isLogedIn: function() {
+      let token = window.localStorage.getItem("token");
+      return token ? true : false;
+    }
   }
 };
 </script>
