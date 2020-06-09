@@ -42,8 +42,7 @@ async function register(name, surname, username, patronymic, password) {
 }
 
 function logout() {
-  window.localStorage.removeItem("token");
-  // TODO reload page
+  window.localStorage.clear();
 }
 // internal methods
 function saveUserToLocalStorage(name, surname, patronymic) {
@@ -52,4 +51,4 @@ function saveUserToLocalStorage(name, surname, patronymic) {
   window.localStorage.setItem("patronymic", patronymic);
 }
 
-export { login, register };
+export { login, register, logout };
