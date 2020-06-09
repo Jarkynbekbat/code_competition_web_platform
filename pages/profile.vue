@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <answer></answer>
     <v-layout column>
       <v-card>
         <v-card-text>
@@ -30,7 +31,13 @@
 </template>
 
 <script>
+import answer from "~/components/answer";
+
 export default {
+  components: {
+    answer
+  },
+
   data() {
     return {
       loading: false,
