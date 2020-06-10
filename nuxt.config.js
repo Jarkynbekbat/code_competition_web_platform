@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ["~plugins/vue2-flip-countdown"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -73,7 +73,8 @@ export default {
    ** Build configuration
    */
   build: {
-    vendor: [],
+    vendor: ["vue2-flip-countdown"],
+
     extend(config, ctx) {}
   }
 };

@@ -3,6 +3,7 @@
     <v-card-title>
       {{ task.description }}
     </v-card-title>
+
     <v-card-subtitle>
       вставьте исходный код сюда <br />
       поддерживаемые языки : java (список будет расширяться)
