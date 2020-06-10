@@ -4,12 +4,12 @@ let baseUrl = "https://codecompetition.herokuapp.com/";
 async function login(username, password) {
   try {
     let url = baseUrl + "api/v1/authenticate";
-    debugger;
     let response = await axios.post(url, {
       username: username,
       password: password
     });
     let token = response.data.token;
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     window.localStorage.setItem("token", token);
     return true;
   } catch (error) {
@@ -40,7 +40,6 @@ async function register(name, surname, username, patronymic, password) {
     alert(error);
   }
 }
-
 function logout() {
   window.localStorage.clear();
 }

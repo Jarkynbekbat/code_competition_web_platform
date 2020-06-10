@@ -4,13 +4,14 @@
       <v-toolbar-title>Соревнования по дисциплинам</v-toolbar-title>
     </v-toolbar>
     <v-tabs vertical>
-      <v-tab v-for="subject in subjects" :key="subject.id">
-        {{ subject.name }}
-      </v-tab>
-
-      <v-tab-item v-for="subject in subjects" :key="subject.id">
-        <competitions :subjectId="subject.id"></competitions>
-      </v-tab-item>
+      <template v-for="(subject, i) in subjects">
+        <v-tab :key="i">
+          {{ subject.name }}
+        </v-tab>
+        <v-tab-item :key="i">
+          <competitions :subjectId="subject.id"></competitions>
+        </v-tab-item>
+      </template>
     </v-tabs>
   </v-card>
 </template>

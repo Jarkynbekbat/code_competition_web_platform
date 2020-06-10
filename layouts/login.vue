@@ -5,9 +5,9 @@
         <div>
           <v-tabs v-model="tab" show-arrows icons-and-text dark grow>
             <v-tabs-slider color="purple darken-4"></v-tabs-slider>
-            <v-tab v-for="i in tabs" :key="i">
-              <v-icon large>{{ i.icon }}</v-icon>
-              <div class="caption py-1">{{ i.name }}</div>
+            <v-tab v-for="(tab, i) in tabs" :key="i">
+              <v-icon large>{{ tab.icon }}</v-icon>
+              <div class="caption py-1">{{ tab.name }}</div>
             </v-tab>
             <v-tab-item>
               <v-card class="px-4">

@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import * as Auth from "../api/auth";
 
 export default {
@@ -64,7 +65,9 @@ export default {
     };
   },
   created: async function() {
+    let token = window.localStorage.getItem("token");
     if (!this.isLogedIn()) window.$nuxt.setLayout("login");
+    else axios.defaults.headers.common["Authorization"] = "Bearer " + token;
   },
   methods: {
     isLogedIn: function() {

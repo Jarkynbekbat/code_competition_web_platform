@@ -7,9 +7,7 @@ let subject = {
 };
 
 async function getAll() {
-  let token = window.localStorage.getItem("token");
   try {
-    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     let response = await axios.get(subject.all);
     return response.data;
   } catch (error) {
