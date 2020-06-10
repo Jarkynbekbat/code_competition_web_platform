@@ -18,7 +18,7 @@
 
 <script>
 import * as Subject from "../api/subjects";
-import competitions from "~/components/Competition.vue";
+import competitions from "~/components/competition.vue";
 
 export default {
   components: {

@@ -13,7 +13,8 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "nuxt": "^2.12.2"
+    "nuxt": "^2.12.2",
+    "vue2-ace-editor": "0.0.15"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0"

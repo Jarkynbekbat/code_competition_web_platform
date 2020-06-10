@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import answer from "~/components/answer";
+import answer from "~/components/participant/answer";
 
 export default {
   components: {

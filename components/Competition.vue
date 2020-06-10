@@ -8,8 +8,8 @@
             v-text="item.start_date + ' - ' + item.end_date"
           ></v-card-subtitle>
           <v-card-actions>
-            <v-btn text>Принять участие</v-btn>
-            <v-btn text>Подробнее</v-btn>
+            <v-btn text @click="takePart(item.id)"> Принять участие</v-btn>
+            <v-btn text :to="'/competition/' + item.id">Подробнее</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -19,6 +19,8 @@
 
 <script>
 import * as CompetitionApi from "../api/competitions";
+import * as ParticipantApi from "../api/participants";
+
 export default {
   props: ["subjectId"],
   data: () => ({
@@ -26,6 +28,15 @@ export default {
   }),
   created: async function() {
     this.items = await CompetitionApi.getBySubjectId(this.subjectId);
+  },
+  methods: {
+    takePart: async function(competitionId) {
+      competitionId;
+      let isSure = confirm(
+        "Работа над задачами начнется сразу, вы уверены что хотите начать сейчас ?"
+      );
+      if (isSure) this.$router.push("/participant/" + competitionId);
+    }
   }
 };
 </script>
