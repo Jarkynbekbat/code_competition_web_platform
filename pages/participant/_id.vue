@@ -109,6 +109,8 @@ export default {
         let userId = window.localStorage.getItem("userId");
         this.competition.id;
         this.participant.id;
+        this.answersMap;
+        debugger;
       }
     }
   }

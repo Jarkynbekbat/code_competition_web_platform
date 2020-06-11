@@ -16,16 +16,14 @@ async function getAll() {
   }
 }
 
-async function getByCompetitionAndUserIds(competitionId, userId) {
+async function isAllowed(competitionId, userId) {
   try {
-    // /api/v1/participant/by_competition_and_user/{comId}/{userId}
     let url = urls.add + `by_competition_and_user/${competitionId}/${userId}`;
-    debugger;
     let response = await axios.get(url);
-    return response.data;
+    return !response.data.isEmpty;
   } catch (error) {
     alert(error);
-    return [];
+    return null;
   }
 }
 
@@ -47,4 +45,4 @@ async function add(competitionId) {
   }
 }
 
-export { getAll, add, getByCompetitionAndUserIds };
+export { getAll, add, isAllowed };

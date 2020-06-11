@@ -36,14 +36,18 @@ export default {
         "Работа над задачами начнется сразу, вы уверены что хотите начать сейчас ?"
       );
       if (isSure) {
-        // let userId = window.localStorage.getItem("userId");
-        // let participants = await ParticipantApi.getByCompetitionAndUserIds(
-        //   competitionId,
-        //   userId
-        // );
-        // debugger;
-        this.$router.push("/participant/" + competitionId);
+        let userId = window.localStorage.getItem("userId");
+        let isAllowed = await this.isItFirstTime(userId, competitionId);
+        if (isAllowed) this.$router.push("/participant/" + competitionId);
+        else
+          alert(
+            "Вы уже поучавствовали в данном соревновании, ждите результатов."
+          );
       }
+    },
+    isItFirstTime: async function(userId, competitionId) {
+      let isAllowed = await ParticipantApi.isAllowed(competitionId, userId);
+      return isAllowed;
     }
   }
 };

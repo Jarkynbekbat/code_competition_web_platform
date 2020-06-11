@@ -1,15 +1,33 @@
 <template>
   <div>
-    <h2>Здесь будет список завершенных соревнований</h2>
-
-    <nuxt-link to="/result/1">competition id 1</nuxt-link> <br />
-    <nuxt-link to="/result/2">competition id 2</nuxt-link><br />
-    <nuxt-link to="/result/3">competition id 3</nuxt-link><br />
+    <center><h2>Cписок завершенных соревнований</h2></center>
+    <br />
+    <template v-for="(competition, index) in completedCompetitions">
+      <completed-competition :key="index" :competition="competition">
+      </completed-competition>
+    </template>
   </div>
 </template>
 
 <script>
-export default {};
+import * as CompetitionsAPI from "~/api/competitions";
+
+import CompletedCompetition from "@/components/completed_competition";
+
+export default {
+  components: {
+    "completed-competition": CompletedCompetition
+  },
+  data: function() {
+    return {
+      completedCompetitions: []
+    };
+  },
+  created: async function() {
+    this.completedCompetitions = await CompetitionsAPI.getAll();
+    debugger;
+  }
+};
 </script>
 
 <style></style>

@@ -10,7 +10,6 @@ import * as CompetitionsApi from "../../api/competitions";
 export default {
   data: function() {
     return {
-      competition: {},
       competition: {}
     };
   },
