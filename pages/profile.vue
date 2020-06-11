@@ -26,6 +26,17 @@
         <v-card-actions> </v-card-actions>
       </v-card>
     </v-layout>
+    <br />
+    <v-card>
+      <v-card-title>
+        Список соревнований в которых вы учавствовали
+      </v-card-title>
+      <v-card-text>
+        <nuxt-link to="/result/1">competition id 1</nuxt-link> <br />
+        <nuxt-link to="/result/2">competition id 2</nuxt-link><br />
+        <nuxt-link to="/result/3">competition id 3</nuxt-link><br />
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 

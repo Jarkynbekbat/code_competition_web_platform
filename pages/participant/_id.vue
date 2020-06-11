@@ -22,12 +22,12 @@
         :task="task"
         @onAnswer="onAnswer"
       ></answers>
-      <scode
+      <!-- <scode
         v-if="task.taskType === 'CODE'"
         :key="index"
         :task="task"
         @onAnswer="onAnswer"
-      ></scode>
+      ></scode> -->
     </template>
     <br />
     <br />

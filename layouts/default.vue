@@ -58,6 +58,11 @@ export default {
           icon: "mdi-chart-bubble",
           title: "Профиль",
           to: "/profile"
+        },
+        {
+          icon: "mdi-chart-bubble",
+          title: "Результаты",
+          to: "/result"
         }
       ],
 
