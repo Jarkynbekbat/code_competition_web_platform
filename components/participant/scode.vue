@@ -1,11 +1,15 @@
 <template>
   <v-card>
+    <h3 style="color:red">
+      Игнорируйте задачи этого типа , временно не доступно
+    </h3>
     <v-card-title>
       {{ task.description }}
     </v-card-title>
 
     <v-card-subtitle>
       вставьте исходный код сюда <br />
+
       поддерживаемые языки : java (список будет расширяться)
     </v-card-subtitle>
 

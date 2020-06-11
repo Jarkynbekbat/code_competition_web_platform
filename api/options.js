@@ -8,10 +8,9 @@ let option = {
 
 async function getByTaskId(id) {
   try {
-    let response = await axios.get(option.all);
-    if (response.data.lenght != 0) {
-      return response.data.filter(a => a.taskId == id);
-    } else return null;
+    let url = baseUrl + "api/v1/option/by_task/" + id;
+    let response = await axios.get(url);
+    return response.data;
   } catch (error) {
     alert(error);
     return null;

@@ -33,9 +33,14 @@ export default {
     getOptions: async function() {
       return await OptionsAPI.getByTaskId(this.task.id);
     },
-    onSelect: function() {
+    onSelect: async function() {
+      let isCorrect = await this.isCorrect();
+      this.$emit("onAnswer", this.task.id, isCorrect);
+    },
+    isCorrect: async function() {
       this.selectedOption;
-      debugger;
+      let correctOptionId = this.options.find(el => el.isCorrect).id;
+      return this.selectedOption == correctOptionId ? true : false;
     }
   }
 };

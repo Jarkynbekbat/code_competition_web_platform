@@ -15,35 +15,36 @@ async function getAll() {
     return [];
   }
 }
+
+async function getByCompetitionAndUserIds(competitionId, userId) {
+  try {
+    // /api/v1/participant/by_competition_and_user/{comId}/{userId}
+    let url = urls.add + `by_competition_and_user/${competitionId}/${userId}`;
+    debugger;
+    let response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return [];
+  }
+}
+
 async function add(competitionId) {
   try {
+    let userId = window.localStorage.getItem("userId");
     let participant = {
-      userId: 3,
+      userId: userId,
       competitionId: competitionId,
       startDate: "2020-06-10T06:53:10.471Z",
       endDate: "2020-06-15T06:53:10.471Z"
     };
-    debugger;
     let response = await axios.post(urls.add, participant);
-    let participantId = 3; // TODO get as a responce
-    return participantId;
+    return response.data;
   } catch (error) {
     alert(error);
     debugger;
     return null;
   }
 }
-async function remove(competitionId) {
-  try {
-    // TODO remove participant by competitionId and userId
-    competitionId;
-    userId;
-    debugger;
-    //     let url = urls.add + item.id;
-    //     let response = await axios.delete(url);
-  } catch (error) {
-    alert(error);
-  }
-}
 
-export { getAll, add, remove };
+export { getAll, add, getByCompetitionAndUserIds };

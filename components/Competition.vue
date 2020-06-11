@@ -35,7 +35,15 @@ export default {
       let isSure = confirm(
         "Работа над задачами начнется сразу, вы уверены что хотите начать сейчас ?"
       );
-      if (isSure) this.$router.push("/participant/" + competitionId);
+      if (isSure) {
+        // let userId = window.localStorage.getItem("userId");
+        // let participants = await ParticipantApi.getByCompetitionAndUserIds(
+        //   competitionId,
+        //   userId
+        // );
+        // debugger;
+        this.$router.push("/participant/" + competitionId);
+      }
     }
   }
 };

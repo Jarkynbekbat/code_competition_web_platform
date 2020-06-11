@@ -2,7 +2,6 @@
   <div>
     <center>
       <h2>{{ competition.name }}</h2>
-
       <flip-countdown
         :deadline="deadline"
         :showDays="false"
@@ -15,19 +14,34 @@
         v-if="task.taskType === 'ANSWER'"
         :key="index"
         :task="task"
+        @onAnswer="onAnswer"
       ></answer>
       <answers
         v-if="task.taskType === 'ANSWERS'"
         :key="index"
         :task="task"
+        @onAnswer="onAnswer"
       ></answers>
-      <scode v-if="task.taskType === 'CODE'" :key="index" :task="task"></scode>
+      <scode
+        v-if="task.taskType === 'CODE'"
+        :key="index"
+        :task="task"
+        @onAnswer="onAnswer"
+      ></scode>
     </template>
+    <br />
+    <br />
+    <br />
+    <v-btn block color="primary" @click="finishUp">Завершить работу</v-btn>
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
 <script>
 import * as CompetitionsAPI from "@/api/competitions";
+import * as ParticipantApi from "@/api/participants";
 import * as TasksAPI from "@/api/tasks";
 
 import answer from "~/components/participant/answer";
@@ -43,7 +57,6 @@ export default {
     scode,
     "flip-countdown": FlipCountdown
   },
-
   data: function() {
     return {
       labels: {
@@ -51,8 +64,14 @@ export default {
         minutes: "минут",
         seconds: "секунд"
       },
-      tasks: [],
+      tasks: [
+        {
+          data: "no data"
+        }
+      ],
       competition: {},
+      participant: {},
+      answersMap: new Map(),
       userId: 0
     };
   },
@@ -68,7 +87,30 @@ export default {
     let competitionId = this.$route.params.id;
     this.competition = await CompetitionsAPI.getById(competitionId);
     this.tasks = await TasksAPI.getByCompetitionId(competitionId);
-    //     debugger;
+    this.createParticipant();
+  },
+  methods: {
+    createParticipant: async function() {
+      let competitionId = this.competition.id;
+      let newParticipant = await ParticipantApi.add(competitionId);
+      this.participant = newParticipant;
+    },
+    onAnswer: async function(taskId, isCorrect) {
+      taskId;
+      isCorrect;
+      this.answersMap.set(taskId, isCorrect);
+      // TODO create participantAnswer
+      this.answersMap;
+      debugger;
+    },
+    finishUp: async function() {
+      let isSure = confirm("Вы уверены что хотите завершить работу?");
+      if (isSure) {
+        let userId = window.localStorage.getItem("userId");
+        this.competition.id;
+        this.participant.id;
+      }
+    }
   }
 };
 </script>
