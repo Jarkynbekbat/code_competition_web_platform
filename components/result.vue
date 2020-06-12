@@ -9,7 +9,8 @@
     ></v-card-subtitle>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn icon @click="show = !show">
+      <v-btn @click="show = !show">
+        подробнее
         <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
       </v-btn>
     </v-card-actions>
@@ -31,6 +32,8 @@
               <br />
             </div>
           </template>
+
+          и так далее ...
         </v-card-text>
       </div>
     </v-expand-transition>

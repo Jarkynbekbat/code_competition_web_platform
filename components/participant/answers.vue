@@ -35,7 +35,9 @@ export default {
     },
     onSelect: async function() {
       let isCorrect = await this.isCorrect();
-      this.$emit("onAnswer", this.task.id, isCorrect);
+      let selectedValue = this.options.find(el => el.id == this.selectedOption)
+        .option;
+      this.$emit("onAnswer", this.task.id, isCorrect, selectedValue);
     },
     isCorrect: async function() {
       this.selectedOption;

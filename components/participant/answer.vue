@@ -27,7 +27,7 @@ export default {
   methods: {
     onAnswer: async function() {
       let isCorrect = await this.isCorrect();
-      this.$emit("onAnswer", this.task.id, isCorrect);
+      this.$emit("onAnswer", this.task.id, isCorrect, this.answer);
     },
     isCorrect: async function() {
       this.answer;

@@ -5,6 +5,7 @@
     <template v-for="(result, index) in results">
       <result :result="result" :number="index + 1" :key="index"> </result>
     </template>
+    и так далее ...
   </div>
 </template>
 

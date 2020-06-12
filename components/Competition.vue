@@ -4,9 +4,11 @@
       <v-col v-for="(item, i) in items" :key="i" cols="12">
         <v-card :color="item.color" dark>
           <v-card-title class="headline" v-text="item.name"></v-card-title>
-          <v-card-subtitle
-            v-text="item.start_date + ' - ' + item.end_date"
-          ></v-card-subtitle>
+          <v-card-subtitle>
+            начало: {{ new Date(item.start_date).toLocaleDateString("ru-RU") }}
+            <br />
+            конец: {{ new Date(item.end_date).toLocaleDateString("ru-RU") }}
+          </v-card-subtitle>
           <v-card-actions>
             <v-btn text @click="takePart(item.id)"> Принять участие</v-btn>
             <v-btn text :to="'/competition/' + item.id">Подробнее</v-btn>
