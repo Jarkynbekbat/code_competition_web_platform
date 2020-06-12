@@ -27,7 +27,7 @@ export default {
     items: []
   }),
   created: async function() {
-    this.items = await CompetitionApi.getBySubjectId(this.subjectId);
+    this.items = await CompetitionApi.getActivesBySubjectId(this.subjectId);
   },
   methods: {
     takePart: async function(competitionId) {

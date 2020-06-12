@@ -32,32 +32,51 @@
         Список соревнований в которых вы учавствовали
       </v-card-title>
       <v-card-text>
-        <nuxt-link to="/result/1">competition id 1</nuxt-link> <br />
-        <nuxt-link to="/result/2">competition id 2</nuxt-link><br />
-        <nuxt-link to="/result/3">competition id 3</nuxt-link><br />
+        <template v-for="(competition, index) in userCompetitions">
+          <completed-competition :key="index" :competition="competition">
+          </completed-competition>
+        </template>
       </v-card-text>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import * as CompetitionsAPI from "~/api/competitions";
+import * as ParticipantsAPI from "~/api/participants";
+import CompletedCompetition from "@/components/completed_competition";
+
 export default {
-  components: {},
+  components: {
+    "completed-competition": CompletedCompetition
+  },
 
   data() {
     return {
-      loading: false,
       name: "имя",
       surname: "имя",
       username: "логин",
-      avatar: "MALE_CAUCASIAN_BLOND_BEARD"
+      avatar: "MALE_CAUCASIAN_BLOND_BEARD",
+      userCompetitions: []
     };
   },
-  created: function() {
+  created: async function() {
     this.name = window.localStorage.getItem("name");
     this.surname = window.localStorage.getItem("surname");
     this.username = window.localStorage.getItem("username");
+    let userId = window.localStorage.getItem("userId");
+    this.userCompetitions = await this.getUserCompetitions(userId);
   },
-  methods: {}
+  methods: {
+    getUserCompetitions: async function(userId) {
+      let userCompetitions = [];
+      let completedCompetitions = await CompetitionsAPI.getCompleteds();
+      for (let competition of completedCompetitions) {
+        let isAllowed = await ParticipantsAPI.isAllowed(competition.id, userId);
+        if (!isAllowed) userCompetitions.push(competition);
+      }
+      return userCompetitions;
+    }
+  }
 };
 </script>

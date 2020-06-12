@@ -15,6 +15,37 @@ async function getAll() {
     return [];
   }
 }
+
+async function getCompleteds() {
+  try {
+    let response = await axios.get(urls.add + "completed");
+
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return [];
+  }
+}
+async function getActives() {
+  try {
+    let response = await axios.get(urls.add + "active");
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return [];
+  }
+}
+async function getActivesBySubjectId(id) {
+  try {
+    let response = await axios.get(urls.add + "active");
+    let filtred = response.data.filter(el => el.subjectId == id);
+    return filtred;
+  } catch (error) {
+    alert(error);
+    return [];
+  }
+}
+
 async function getById(id) {
   try {
     let response = await axios.get(urls.add + id);
@@ -30,6 +61,7 @@ async function getBySubjectId(id) {
   let url = urls.add + "by_subject/" + id;
   try {
     let response = await axios.get(url);
+
     return response.data;
   } catch (error) {
     alert(error);
@@ -37,4 +69,11 @@ async function getBySubjectId(id) {
   }
 }
 
-export { getAll, getById, getBySubjectId };
+export {
+  getAll,
+  getById,
+  getBySubjectId,
+  getCompleteds,
+  getActives,
+  getActivesBySubjectId
+};

@@ -24,7 +24,7 @@ export default {
     };
   },
   created: async function() {
-    this.completedCompetitions = await CompetitionsAPI.getAll();
+    this.completedCompetitions = await CompetitionsAPI.getCompleteds();
     debugger;
   }
 };
