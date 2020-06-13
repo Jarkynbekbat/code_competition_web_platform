@@ -19,21 +19,28 @@
       <div v-show="show">
         <v-divider></v-divider>
         <v-card-text>
-          <template v-for="(item, index) in result.detail">
+          <template v-for="(item, index) in result.detailCheckResponses">
             <div :key="index">
               <v-card>
-                <v-card-title> {{ item.taskDescription }} </v-card-title>
+                <v-card-title
+                  :style="
+                    item.participantAnswer === item.correctAnswer
+                      ? 'color:green'
+                      : 'color:red'
+                  "
+                >
+                  {{ item.taskDescription }}
+                </v-card-title>
+
                 <v-card-subtitle>
-                  ответ: {{ item.participantAnswer }} <br />
-                  верный ответ: {{ item.correctAnswer }}
+                  <strong> ответ: </strong> {{ item.participantAnswer }} <br />
+                  <strong> верный ответ:</strong> {{ item.correctAnswer }}
                 </v-card-subtitle>
               </v-card>
               <v-divider></v-divider>
               <br />
             </div>
           </template>
-
-          и так далее ...
         </v-card-text>
       </div>
     </v-expand-transition>

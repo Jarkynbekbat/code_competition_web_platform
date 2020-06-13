@@ -5,9 +5,9 @@
         <v-card :color="item.color" dark>
           <v-card-title class="headline" v-text="item.name"></v-card-title>
           <v-card-subtitle>
-            начало: {{ new Date(item.start_date).toLocaleDateString("ru-RU") }}
-            <br />
-            конец: {{ new Date(item.end_date).toLocaleDateString("ru-RU") }}
+            <!-- начало: {{ new Date(item.start_date).toLocaleDateString("ru-RU") }} -->
+            <!-- <br /> -->
+            дедлайн: {{ new Date(item.end_date).toLocaleDateString("ru-RU") }}
           </v-card-subtitle>
           <v-card-actions>
             <v-btn text @click="takePart(item.id)"> Принять участие</v-btn>
@@ -40,11 +40,12 @@ export default {
       if (isSure) {
         let userId = window.localStorage.getItem("userId");
         let isAllowed = await this.isItFirstTime(userId, competitionId);
+        debugger;
         if (isAllowed) this.$router.push("/participant/" + competitionId);
-        else
-          alert(
-            "Вы уже поучавствовали в данном соревновании, ждите результатов."
-          );
+        else {
+          alert("Вы уже поучавствовали в данном соревновании");
+          this.$router.push("/result/" + competitionId);
+        }
       }
     },
     isItFirstTime: async function(userId, competitionId) {

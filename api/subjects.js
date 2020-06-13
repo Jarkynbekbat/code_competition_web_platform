@@ -11,7 +11,7 @@ async function getAll() {
     let response = await axios.get(subject.all);
     return response.data;
   } catch (error) {
-    alert(error);
+    // alert(error);
     return [];
   }
 }

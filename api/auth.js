@@ -50,6 +50,7 @@ async function register(name, surname, username, patronymic, password) {
   }
 }
 function logout() {
+  delete axios.defaults.headers.common["Authorization"];
   window.localStorage.clear();
 }
 // internal methods

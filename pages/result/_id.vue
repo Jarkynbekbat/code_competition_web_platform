@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h2>Результат соревнования id:{{ completedCompetitionId }}</h2>
+    <h2>Результат</h2>
     <br />
     <template v-for="(result, index) in results">
       <result :result="result" :number="index + 1" :key="index"> </result>
     </template>
-    и так далее ...
   </div>
 </template>
 
 <script>
 import * as ResultAPI from "~/api/result";
+import * as CompetitionsAPI from "~/api/competitions";
 import result from "@/components/result";
 
 export default {
@@ -20,57 +20,28 @@ export default {
   data: function() {
     return {
       results: [],
-      completedCompetitionId: 0
+      competitionId: 0
     };
   },
   created: async function() {
-    this.completedCompetitionId = this.$route.params.id;
-    this.results = await this.getResults(this.completedCompetitionId);
-    debugger;
+    this.competitionId = this.$route.params.id;
+    let isCompleted = await CompetitionsAPI.isCompleted(this.competitionId);
+    if (isCompleted) {
+      this.results = await this.getResults(this.competitionId);
+    } else {
+      let userId = window.localStorage.getItem("userId");
+      this.results = await ResultAPI.getResultByUserAndCompetitionIds(
+        userId,
+        this.competitionId
+      );
+    }
   },
   methods: {
-    getResults: async function(completedCompetitionId) {
-      // let results = await ResultAPI.getResultByCompletedCompetitionId(
-      //   this.completedCompetitionId
-      // );
-      // debugger;
-
-      return [
-        {
-          participantName: "jarkynbek",
-          correctAnswersCount: 6,
-          tasksCount: 10,
-          detail: [
-            {
-              taskDescription: "5+5",
-              participantAnswer: "11",
-              correctAnswer: "10"
-            },
-            {
-              taskDescription: "10+10",
-              participantAnswer: "12",
-              correctAnswer: "20"
-            }
-          ]
-        },
-        {
-          participantName: "Adilet",
-          correctAnswersCount: 8,
-          tasksCount: 10,
-          detail: [
-            {
-              taskDescription: "5+5",
-              participantAnswer: "11",
-              correctAnswer: "10"
-            },
-            {
-              taskDescription: "10+10",
-              participantAnswer: "12",
-              correctAnswer: "20"
-            }
-          ]
-        }
-      ];
+    getResults: async function(competitionId) {
+      let results = await ResultAPI.getResultByCompetitionId(
+        this.competitionId
+      );
+      return results;
     }
   }
 };

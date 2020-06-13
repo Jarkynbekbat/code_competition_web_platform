@@ -18,7 +18,8 @@ async function getAll() {
 
 async function isAllowed(competitionId, userId) {
   try {
-    let url = urls.add + `by_competition_and_user/${competitionId}/${userId}`;
+    let url =
+      urls.add + `check_by_competition_and_user/${competitionId}/${userId}`;
     let response = await axios.get(url);
     return !response.data.isEmpty;
   } catch (error) {

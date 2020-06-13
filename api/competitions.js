@@ -57,6 +57,16 @@ async function getById(id) {
   }
 }
 
+async function isCompleted(competitionId) {
+  try {
+    let actives = await getActives();
+    let isExist = actives.map(el => el.id).includes(parseInt(competitionId));
+    return !isExist;
+  } catch (error) {
+    alert(error);
+  }
+}
+
 async function getBySubjectId(id) {
   let url = urls.add + "by_subject/" + id;
   try {
@@ -72,6 +82,7 @@ async function getBySubjectId(id) {
 export {
   getAll,
   getById,
+  isCompleted,
   getBySubjectId,
   getCompleteds,
   getActives,

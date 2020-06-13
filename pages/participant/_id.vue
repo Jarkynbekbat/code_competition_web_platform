@@ -21,7 +21,6 @@
           :task="task"
           @onAnswer="onAnswer"
         ></answers>
-
         <!-- <scode
         v-if="task.taskType === 'CODE'"
         :key="index"
@@ -43,6 +42,7 @@
 <script>
 import * as CompetitionsAPI from "@/api/competitions";
 import * as ParticipantApi from "@/api/participants";
+import * as ParticipantAnswerApi from "@/api/participant_answer";
 import * as TasksAPI from "@/api/tasks";
 
 import answer from "~/components/participant/answer";
@@ -103,38 +103,38 @@ export default {
     let competitionId = this.$route.params.id;
     this.competition = await CompetitionsAPI.getById(competitionId);
     this.tasks = await TasksAPI.getByCompetitionId(competitionId);
-    // this.participant = await this.createParticipant(this.competition.id);
+    this.participant = await this.createParticipant(this.competition.id);
+    debugger;
   },
   methods: {
     createParticipant: async function(competitionId) {
       let newParticipant = await ParticipantApi.add(competitionId);
       return newParticipant;
     },
-    onAnswer: async function(taskId, isCorrect, value) {
-      this.deadline;
-      debugger;
+    sendParticipantAnswers: async function() {
+      let participantAnswers = this.answersMap.values();
+      for (let item of participantAnswers) {
+        await ParticipantAnswerApi.add(item);
+      }
+    },
 
-      taskId;
-      isCorrect;
+    onAnswer: async function(taskId, isCorrect, value) {
       this.answersMap.set(taskId, {
         isCorrect: isCorrect,
-        taskId: taskId,
-        option: value
+        option: value,
+        participantId: this.participant.id,
+        taskId: taskId
       });
-      // TODO create participantAnswer
-      this.answersMap;
-      debugger;
     },
     finishUp: async function() {
       let isSure = confirm("Вы уверены что хотите завершить работу?");
       if (isSure) {
-        let userId = window.localStorage.getItem("userId");
-        this.competition.id;
-        this.participant.id;
-        this.answersMap;
-        debugger;
+        await this.sendParticipantAnswers();
+        alert(
+          "Сохранено,чтобы посмотреть ваши результаты нажмите на кнопку принять участие снова"
+        );
       }
-      this.$router.push("/");
+      this.$router.push("/result/" + this.competition.id);
     }
   }
 };

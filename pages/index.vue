@@ -3,7 +3,7 @@
     <v-toolbar flat dark>
       <v-toolbar-title>Соревнования по дисциплинам</v-toolbar-title>
     </v-toolbar>
-    <v-tabs vertical>
+    <v-tabs>
       <template v-for="(subject, i) in subjects">
         <v-tab :key="i">
           {{ subject.name }}

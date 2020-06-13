@@ -11,7 +11,6 @@
 
 <script>
 import * as CompetitionsAPI from "~/api/competitions";
-
 import CompletedCompetition from "@/components/completed_competition";
 
 export default {
@@ -25,7 +24,6 @@ export default {
   },
   created: async function() {
     this.completedCompetitions = await CompetitionsAPI.getCompleteds();
-    debugger;
   }
 };
 </script>
