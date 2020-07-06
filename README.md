@@ -1,11 +1,11 @@
 # code_competition_web_platform
+Client application for conducting online competitions in computer science and other disciplines
 
 ## UI 
 <p align="center">
   <img src="https://github.com/Jarkynbekbat/code_competition_web_platform/blob/master/assets/screenshots/Screenshot_1.png" width="350" >
   <img src="https://github.com/Jarkynbekbat/code_competition_web_platform/blob/master/assets/screenshots/Screenshot_2.png" width="350" >
 </p>
-
 <p align="center">
   <img src="https://github.com/Jarkynbekbat/code_competition_web_platform/blob/master/assets/screenshots/Screenshot_3.png" width="350" >
   <img src="https://github.com/Jarkynbekbat/code_competition_web_platform/blob/master/assets/screenshots/Screenshot_4.png" width="350" >
